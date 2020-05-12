@@ -1,6 +1,6 @@
 {
   "name": "faunadb-geo",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Library for creating, managing, and querying geospatial resources in FaunaDB.",
   "main": "index.js",
   "repository": "https://github.com/potatopotaro/faunadb-geo.git",
