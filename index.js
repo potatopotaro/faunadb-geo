@@ -25,7 +25,7 @@ const GeoQuery = (q) => (
   center,
   radius,
   {
-    maxReadOps = 25,
+    maxReadOps = 10,
     approximateSearchSpace,
     allowUndesiredResults,
     dropPoorPerformingCells,
