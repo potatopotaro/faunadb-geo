@@ -1,6 +1,11 @@
-const { CalculateDistance, GeoQuery } = require("./FQL");
+const {
+  CalculateDistance,
+  CreateGeoSpatialIndex,
+  GeoSearch,
+} = require("./FQL");
 
 module.exports = (q) => ({
-  GeoQuery: GeoQuery(q),
   CalculateDistance: CalculateDistance(q),
+  CreateGeoSpatialIndex: CreateGeoSpatialIndex(q),
+  GeoSearch: GeoSearch(q),
 });

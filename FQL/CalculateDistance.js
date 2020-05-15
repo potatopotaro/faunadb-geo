@@ -1,22 +1,25 @@
 const Atan2 = require("./Atan2");
 
-const CalculateDistance = (q) => (toEntity, fromEntity) =>
+// Shout out to Brecht at FaunaDB for both CalculateDistance and Atan2.
+// Thank you good sir.
+
+const CalculateDistance = (q) => (to, from) =>
   q.Let(
     {
       radiusEarthKm: 6371,
       pi: 3.141592653589793,
       piQuot: q.Divide(q.Var("pi"), 180),
-      toEntityLat: q.Select(["lat"], toEntity),
-      toEntityLon: q.Select(["lon"], toEntity),
-      fromEntityLat: q.Select(["lat"], fromEntity),
-      fromEntityLon: q.Select(["lon"], fromEntity),
+      toLat: q.Select(["lat"], to),
+      toLon: q.Select(["lon"], to),
+      fromLat: q.Select(["lat"], from),
+      fromLon: q.Select(["lon"], from),
       distLat: q.Subtract(
-        q.Multiply(q.Var("toEntityLat"), q.Var("piQuot")),
-        q.Multiply(q.Var("fromEntityLat"), q.Var("piQuot"))
+        q.Multiply(q.Var("toLat"), q.Var("piQuot")),
+        q.Multiply(q.Var("fromLat"), q.Var("piQuot"))
       ),
       distLon: q.Subtract(
-        q.Multiply(q.Var("toEntityLon"), q.Var("piQuot")),
-        q.Multiply(q.Var("fromEntityLon"), q.Var("piQuot"))
+        q.Multiply(q.Var("toLon"), q.Var("piQuot")),
+        q.Multiply(q.Var("fromLon"), q.Var("piQuot"))
       ),
       a: q.Add(
         q.Multiply(
@@ -25,8 +28,8 @@ const CalculateDistance = (q) => (toEntity, fromEntity) =>
         ),
         q.Multiply(
           q.Multiply(
-            q.Cos(q.Multiply(q.Var("toEntityLat"), q.Var("piQuot"))),
-            q.Cos(q.Multiply(q.Var("fromEntityLat"), q.Var("piQuot")))
+            q.Cos(q.Multiply(q.Var("toLat"), q.Var("piQuot"))),
+            q.Cos(q.Multiply(q.Var("fromLat"), q.Var("piQuot")))
           ),
           q.Multiply(
             q.Sin(q.Divide(q.Var("distLon"), 2)),

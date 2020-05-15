@@ -11,19 +11,23 @@ const {
 
 const OptimalRead = require("./OptimalRead");
 
-const GeoQuery = (q) => (
+const GeoSearch = (q) => (
   indexName,
   center,
   radius,
   {
     maxReadOps = 10,
-    approximateSearchSpace,
-    allowUndesiredResults,
-    dropPoorPerformingCells,
-    disableBonusReadOps,
-    verbose,
+    // TODO: Implement the options below
+    // approximateSearchSpace = false,
+    // allowUndesiredResults = false,
+    // dropPoorPerformingCells = false,
+    disableBonusReadOps = false,
+    verbose = false,
   } = {}
 ) => {
+  const approximateSearchSpace = false;
+  const allowUndesiredResults = false;
+  const dropPoorPerformingCells = false;
   const additionalReadOps = disableBonusReadOps
     ? 0
     : calcAdditionalReadOps(center, radius, {
@@ -108,7 +112,7 @@ const GeoQuery = (q) => (
     sourceRanges.length + diffRanges.length + diffOnDiffRanges.length;
 
   if (readOpsUsed > maxReadOps)
-    return GeoQuery(q)(indexName, center, radius, {
+    return GeoSearch(q)(indexName, center, radius, {
       maxReadOps,
       approximateSearchSpace,
       allowUndesiredResults,
@@ -125,4 +129,4 @@ const GeoQuery = (q) => (
   return q.Union(...readExpressions);
 };
 
-module.exports = GeoQuery;
+module.exports = GeoSearch;

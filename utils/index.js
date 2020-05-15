@@ -6,6 +6,7 @@ const finishLowerBoundKey = require("./finishLowerBoundKey");
 const finishUpperBoundKey = require("./finishUpperBoundKey");
 const optimizeWithDiffs = require("./optimizeWithDiffs");
 const rangeOptimizeKeys = require("./rangeOptimizeKeys");
+const latLonToGeohash = require("./latLonToGeohash");
 
 module.exports = {
   calcAdditionalReadOps,
@@ -16,4 +17,5 @@ module.exports = {
   finishUpperBoundKey,
   optimizeWithDiffs,
   rangeOptimizeKeys,
+  latLonToGeohash,
 };
