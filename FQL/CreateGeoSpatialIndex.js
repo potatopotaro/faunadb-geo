@@ -1,5 +1,4 @@
 const _ = require("lodash");
-const { CreatePrefixSearchIndex } = require("faunadb-community-utils");
 
 const CreateGeoSpatialIndex = (q) => (
   { SelectPath, minLength = 3, maxLength = 32 },
@@ -7,7 +6,9 @@ const CreateGeoSpatialIndex = (q) => (
 ) => {
   if (!SelectPath) throw "Please provide a SelectPath in geohash_params.";
 
-  return CreatePrefixSearchIndex(q)({
+  const { CreatePrefixSearchIndex } = require("faunadb-community-utils")(q);
+
+  return CreatePrefixSearchIndex({
     fieldSelectPath: SelectPath,
     minPrefixLength: minLength,
     maxPrefixLength: maxLength,
